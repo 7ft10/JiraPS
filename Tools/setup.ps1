@@ -5,7 +5,7 @@
 param()
 
 # PowerShell 5.1 and bellow need the PSGallery to be intialized
-if (-not ($gallery = Get-PSRepository -Name PSGallery -ErrorAction SilentlyContinue)) {
+if (-not (Get-PSRepository -Name PSGallery -ErrorAction SilentlyContinue)) {
     Write-Host "Installing PackageProvider NuGet"
     $null = Install-PackageProvider -Name NuGet -Force -ErrorAction SilentlyContinue
 }
@@ -13,7 +13,7 @@ if (-not ($gallery = Get-PSRepository -Name PSGallery -ErrorAction SilentlyConti
 # Update PowerShellGet if needed
 if ((Get-Module PowershellGet -ListAvailable)[0].Version -lt [version]"1.6.0") {
     Write-Host "Updating PowershellGet"
-    Install-Module PowershellGet -Scope CurrentUser -Force
+    Install-Module PowershellGet -Scope CurrentUser -Force -AllowClobber
 }
 
 Write-Host "Installing Dependencies"

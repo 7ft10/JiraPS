@@ -15,6 +15,7 @@ function ConvertTo-JiraComponent {
                 'Name'        = $i.name
                 'RestUrl'     = $i.self
                 'Lead'        = $i.lead
+                'Description' = $i.description
                 'ProjectName' = $i.project
                 'ProjectId'   = $i.projectId
             }
