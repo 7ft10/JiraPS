@@ -2,9 +2,12 @@ function Add-JiraComponent {
     # .ExternalHelp ..\JiraPS-help.xml
     [CmdletBinding( SupportsShouldProcess )]
     param(
+        [Parameter( Mandatory )]
+        [ValidateNotNullOrEmpty()]
         [String]
         $Name,
 
+        [Parameter()]
         [String]
         $Description,
 
@@ -18,6 +21,7 @@ function Add-JiraComponent {
         [string]
         $AssigneeType = "PROJECT_DEFAULT",
 
+        [Parameter( Mandatory )]
         [ValidateScript(
             {
                 if (("JiraPS.Project" -notin $_.PSObject.TypeNames) -and (($_ -isnot [String]))) {
@@ -78,16 +82,16 @@ function Add-JiraComponent {
             }
         }
 
-        $parameter = @{
+        $request = @{
             URI        = $resourceURi
             Method     = "POST"
             Body       = ConvertTo-Json -InputObject $requestBody
             Credential = $Credential
         }
-        Write-Debug "[$($MyInvocation.MyCommand.Name)] Invoking JiraMethod with `$parameter"
+        Write-Debug "[$($MyInvocation.MyCommand.Name)] Invoking JiraMethod with `$request"
 
         if ($PSCmdlet.ShouldProcess($Name)) {
-            $result = Invoke-JiraMethod @parameter
+            $result = Invoke-JiraMethod @request
 
             Write-Output (ConvertTo-JiraComponent -InputObject $result)
         }

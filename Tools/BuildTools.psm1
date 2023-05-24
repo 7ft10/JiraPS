@@ -251,7 +251,7 @@ function Remove-Utf8Bom {
 function Set-GitUser {
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseShouldProcessForStateChangingFunctions", "")]
     param()
-    # github's PAT is stored to ~\.git-credentials within the Release Pipeline
+    # github's PATH is stored to ~\.git-credentials within the Release Pipeline
     # to avoid it being passed as parameter
 
     if (-not (git config user.email)) { git config user.email "support@atlassianps.net" }

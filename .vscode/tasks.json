@@ -60,6 +60,10 @@
                 "kind": "test",
                 "isDefault": true
             },
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "Build"
+            ],
             "problemMatcher": []
         },
         {
@@ -71,7 +75,7 @@
         {
             "label": "Initial Setup",
             "type": "shell",
-            "command": "'./Tools/setup.ps1'",
+            "command": "./Tools/setup.ps1",
             "problemMatcher": []
         }
     ]
